@@ -1,0 +1,60 @@
+# Server Configuration
+server:
+  port: 8090
+  host: 0.0.0.0
+
+# Application Properties
+app:
+  greeting: Hello
+
+# Metrics
+metrics:
+  rest-request:
+    enabled: false
+
+# Variables de Base de Datos
+db:
+  host: localhost
+  port: 5432
+  name: distribuida
+  user: postgres
+  password: root
+
+# DataSource Configuration
+helidon:
+  datasource:
+    distribuida:
+      connection-pool-type: hikari
+      connection-pool:
+        min-pool-size: 5
+        max-pool-size: 20
+        connection-timeout: 30000
+      url: jdbc:postgresql://localhost:5432/distribuida
+      username: postgres
+      password: root
+      driver-class-name: org.postgresql.Driver
+
+# Flyway Configuration
+flyway:
+  enabled: true
+  datasources:
+    distribuida:
+      url: jdbc:postgresql://localhost:5432/distribuida
+      user: postgres
+      password: root
+      locations:
+        - classpath:db/migration
+      baseline-on-migrate: true
+
+# Consul Service Discovery
+consul:
+  host: localhost
+  port: 8500
+  register: true
+
+service:
+  name: app-authors
+  health-check:
+    path: /health/ready
+    interval: 10s
+    deregister-after: 1m
