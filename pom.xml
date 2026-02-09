@@ -26,6 +26,15 @@
             <artifactId>helidon-microprofile-health</artifactId>
         </dependency>
 
+        <!-- Fault Tolerance -->
+        <!-- Source: https://mvnrepository.com/artifact/io.helidon.microprofile/helidon-microprofile-fault-tolerance -->
+        <dependency>
+            <groupId>io.helidon.microprofile</groupId>
+            <artifactId>helidon-microprofile-fault-tolerance</artifactId>
+            <version>4.4.0-M1</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- JSON Processing (Jackson) -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
