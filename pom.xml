@@ -198,18 +198,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Flyway (opcional, si lo usas para migraciones DB) -->
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-            <version>10.21.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-database-postgresql</artifactId>
-            <version>10.21.0</version>
-            <scope>runtime</scope>
-        </dependency>
+
 
         <!-- Testing -->
         <dependency>

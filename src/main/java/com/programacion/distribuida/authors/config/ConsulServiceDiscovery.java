@@ -82,7 +82,7 @@ public class ConsulServiceDiscovery {
             newService.setPort(servicePort);
             newService.setAddress(serviceAddress);
 
-            String healthCheckUrl = "http://" + serviceAddress + ":" + servicePort + healthCheckPath;
+            String healthCheckUrl = "http://" + hostname + ":" + servicePort + healthCheckPath;
             NewService.Check check = new NewService.Check();
             check.setHttp(healthCheckUrl);
             check.setInterval(healthCheckInterval);

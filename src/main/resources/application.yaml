@@ -1,6 +1,6 @@
 # Server Configuration
 server:
-  port: 8090
+  port: ${SERVER_PORT:8080}
   host: 0.0.0.0
 
 # Application Properties
@@ -14,47 +14,33 @@ metrics:
 
 # Variables de Base de Datos
 db:
-  host: localhost
+  host: ${DB_HOST:localhost}
   port: 5432
-  name: distribuida
-  user: postgres
-  password: root
+  name: ${DB_NAME:distribuida}
+  user: ${DB_USER:pg}
+  password: ${DB_PASSWORD:root}
 
-# DataSource Configuration
-helidon:
-  datasource:
-    distribuida:
-      connection-pool-type: hikari
-      connection-pool:
-        min-pool-size: 5
-        max-pool-size: 20
-        connection-timeout: 30000
-      url: jdbc:postgresql://localhost:5432/distribuida
-      username: postgres
-      password: root
-      driver-class-name: org.postgresql.Driver
+# DataSource Configuration (Helidon 4.x format)
+javax:
+  sql:
+    DataSource:
+      distribuida:
+        dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+        dataSource:
+          url: jdbc:postgresql://${db.host}:${db.port}/${db.name}
+          user: ${db.user}
+          password: ${db.password}
+        maximumPoolSize: 20
+        minimumIdle: 5
+        connectionTimeout: 30000
+        idleTimeout: 600000
 
-# Flyway Configuration
-flyway:
-  enabled: true
-  datasources:
-    distribuida:
-      url: jdbc:postgresql://localhost:5432/distribuida
-      user: postgres
-      password: root
-      locations:
-        - classpath:db/migration
-      baseline-on-migrate: true
+
 
 # Consul Service Discovery
 consul:
-  host: localhost
-  port: 8500
-  register: true
+  host: ${CONSUL_HOST:localhost}
+  port: ${CONSUL_PORT:8500}
 
 service:
-  name: app-authors
-  health-check:
-    path: /health/ready
-    interval: 10s
-    deregister-after: 1m
+  name: ${SERVICE_NAME:app-authors}
